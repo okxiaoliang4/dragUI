@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no" />
+		<meta charset="UTF-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="jquery.ui/jquery-ui.css" />
+		<link rel="stylesheet" type="text/css" href="jquery.ui/jquery-ui.structure.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/css.css" />
+	</head>
+
+	<body>
+		<div class="container design">
+			<div class="tools-bar">
+				<h4>通用字段</h4>
+				<ul class="tools">
+					<li id="drog_text">單行文本</li>
+					<li id="drog_number">数字</li>
+					<li id="drog_textarea">多行文本</li>
+					<li id="drog_checkbox">多选框</li>
+					<li id="drog_radio">单选框</li>
+					<li id="drog_dropdown">下拉框</li>
+					<li id="drog_date">日期</li>
+					<li id="drog_time">时间</li>
+					<li id="drog_dropdown2">多级下拉框</li>
+					<li id="drog_radioItem">组合单选框</li>
+					<li id="drog_file">文件上传</li>
+					<li id="drog_image">图片</li>
+					<li id="drog_dividingLine">分隔符</li>
+					<li id="drog_dropdown2">描述文字</li>
+				</ul>
+				<h4>联系信息字段</h4>
+				<ul class="tools">
+					<li>姓名</li>
+					<li>电子邮箱</li>
+					<li>地址</li>
+					<li>地理位置</li>
+					<li>电话</li>
+					<li>网址</li>
+				</ul>
+				<h4>商品字段</h4>
+				<ul class="tools">
+					<li>配图商品</li>
+					<li>无图商品</li>
+				</ul>
+			</div>
+			<div class="form">
+				<div id="form-title">
+					<h3>表單名稱</h3>
+				</div>
+				<div id="form-design"></div>
+				<div id="form-Button">
+					<input id="goToPreview" class="btn btn-default col-xs-2 col-xs-offset-4" type="button" value="預覽" />
+					<input id="save" class="btn btn-primary col-xs-2" style="margin-left: 10px;" type="button" value="保存" />
+				</div>
+			</div>
+			<div id="property"></div>
+		</div>
+	</body>
+
+	<script>
+		isDesignView = true;
+	</script>
+	<script src="jquery.ui/external/jquery/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="jquery.ui/jquery-ui-1.10.3.min.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="js/util.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="js/react/react.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/react/react-dom.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/react/remarkable.min.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="js/angular.1.5.8.min.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="js/react/component/react-form-design.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/react/component/react-form-property.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		$(function() {
+			$("#form-design").droppable({
+				accept: "li",
+				drop: function(event, ui) {
+					var id = uuid();
+					myComponentFormDesign.addOneData({
+						id: id,
+						elementType: ui.draggable[0].id,
+						name: "",
+						value: "",
+						className: "col-xs-6",
+						title: $(ui.draggable[0]).text()
+					});
+				}
+			});
+
+			$(".tools li").draggable({
+				revert: "invalid",
+				helper: "clone",
+				start: function(event, ui) {
+					$(this).css("opacity", "0.5");
+				},
+				stop: function(event, ui) {
+					$(this).css("opacity", "1");
+				}
+			});
+
+			$("#form-design").sortable({
+				items: ".form-group", //只是tr可以拖动
+				opacity: 0.6, //拖动时，透明度为0.6
+				revert: true, //释放时，增加动画
+				update: function(event, ui) { //更新排序之后
+					var sortIds = $(this).sortable("toArray");
+					var formListData = myComponentFormDesign.state.formListData;
+					var sortFormListData = [];
+					for(var i = 0; i < formListData.length; i++) {
+						for(var j = 0; j < sortIds.length; j++) {
+							if(sortIds[j] == formListData[i].id) {
+								sortFormListData[j] = formListData[i];
+								break;
+							}
+						}
+					}
+					myComponentFormDesign.handleChange(sortFormListData);
+				}
+			});
+			$("#form-design").disableSelection();
+
+			$("#goToPreview").on("click", function() {
+				var designData = escape(JSON.stringify(myComponentFormDesign.state.formListData));
+				window.location.href = "preview.html?designData=" + designData;
+				console.log(designData);
+			});
+
+			console.log(JSON.stringify(myComponentFormDesign.state.formListData));
+
+		});
+	</script>
+
+</html>

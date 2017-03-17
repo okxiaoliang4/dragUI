@@ -1,0 +1,149 @@
+.container.design {
+	padding: 0px;
+	width: 1280px;
+	margin-top: 50px;
+}
+
+.container.design .tools-bar {
+	width: 282px;
+	float: left;
+	border: 1px solid #ddd;
+	border-bottom: none;
+	background-color: #fff;
+	margin-left: 10px;
+}
+
+.container.design .tools-bar h4 {
+	float: left;
+}
+
+.container.design .tools-bar h4,
+#property h4 {
+	background-color: #efefef;
+	margin: 0px;
+	padding: 10px;
+	font-size: 15px;
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+}
+
+.container.design .tools {
+	padding: 0px;
+	float: left;
+	list-style-type: none;
+}
+
+.container.design .tools li {
+	width: 140px;
+	box-sizing: border-box;
+	display: block;
+	padding: 10px 10px;
+	cursor: move;
+	font-size: 14px;
+	float: left;
+}
+
+.container.design .tools li:nth-of-type(odd) {
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+.container.design .tools li:nth-of-type(even) {
+	border-bottom: 1px solid #ddd;
+}
+
+.container.design .form {
+	margin-left: 10px;
+	float: left;
+	width: 580px;
+}
+
+.container.design #form-title {
+	background-color: #EFEFEF;
+	border: 1px solid #ccc;
+	border-bottom: none;
+	padding: 15px;
+}
+
+.container.design #form-design {
+	overflow: hidden;
+	min-height: 500px;
+	width: 100%;
+	float: left;
+	background-color: #fff;
+	border: 1px solid #ddd;
+}
+
+.container.design #form-design .form-design-body {
+	width: 100%;
+	height: 100%;
+	float: left;
+	padding-top: 20px;
+}
+
+.container.design #form-design .form-group p {
+	cursor: pointer;
+	display: block;
+	z-index: 100;
+	height: calc( 20px + 100%);
+	width: 100%;
+	position: absolute;
+	top: -10px;
+	left: 0px;
+}
+
+.container.design #form-design .form-group p:hover {
+	border: 1px dashed #ccc;
+}
+
+.container.design #form-design .form-group p.active {
+	border: 1px solid #ccc;
+	background-color: rgba(255, 235, 0, 0.06);
+}
+
+.container.design #form-Button {
+	float: left;
+	width: 100%;
+	padding: 10px;
+	background-color: #EFEFEF;
+	border: 1px solid #ccc;
+	border-top: none;
+}
+
+.container.design #property {
+	margin-left: 10px;
+	width: 370px;
+	overflow: hidden;
+	border: 1px solid #ddd;
+	background-color: #fff;
+	box-sizing: border-box;
+	z-index: 900;
+	min-height: 500px;
+	float: left;
+}
+
+.container.design .no-property {
+	margin-top: 10px;
+	background-color: #ffda55;
+	text-align: center;
+	padding: 15px;
+}
+
+.container.design .no-property .no-property-title {
+	font-size: 20px;
+}
+
+.container.design .no-property .no-property-content {
+	margin-top: 10px;
+	font-size: 15px;
+}
+
+.container.design .label-title {
+	margin-top: 15px;
+	font-size: 14px;
+}
+
+.container.design .propertyUI {
+	float: left;
+	width: 100%;
+}
